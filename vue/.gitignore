@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+dist/
+npm-debug.log
+src/vendors
+.idea/
+hot
+
+mix-manifest\.json
+
+/css/
+
+/fonts/
+
+/images/
+
+/js/
