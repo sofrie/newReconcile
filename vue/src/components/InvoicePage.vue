@@ -194,7 +194,6 @@
                             <router-link :to="{path:'/awb/'+invoice.month+'/'+invoice.year+'/'+invoice.logistic}">
                                 <button class="btn btn-primary button_normal">View Data</button>
                             </router-link>
-
                             <button class="btn btn-primary button_normal" v-on:click="downloadFile()">Download</button>
                             <button class="btn btn-primary button_normal pull-right" v-on:click="approved()">Approve</button>
                             <button class="btn btn-primary button_normal pull-right" v-on:click="checked()">Check</button>
@@ -209,7 +208,7 @@
                 <div class="panel ">
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            <i class="fa fa-fw ti-download"></i> Upload History {{invoice.logistic}}
+                            <i class="fa fa-fw ti-download"></i> Upload History
                         </h3>
                         <span class="pull-right">
                             <i class="fa fa-fw ti-angle-up clickable"></i>
@@ -257,7 +256,6 @@
     import localforage from 'localforage'
     import {upload} from './file-upload.service.js'
     import axios from 'axios'
-	import cookie from 'cookie'
     import dt from "datatables.net";
     import datatables_bootstrap from "datatables.net-bs/js/dataTables.bootstrap.js";
     require("datatables.net-bs/css/dataTables.bootstrap.css");
@@ -269,7 +267,7 @@
     const formData = new window.FormData()
     export default {
         name: "datatables",
-		props: {
+        props: {
             id: {
                 type: String,
                 default: 'Vue!'
@@ -293,7 +291,7 @@
                 listYear: [],
                 x: 0,
                 i: 0,
-				parts : ''
+				parts: ''
             }
         ),
         mounted: function () {
@@ -428,7 +426,7 @@
 				if(this.parts.length==2)
 				this.parts=this.parts.pop().split(";");
 			},
-			downloadFile () {
+            downloadFile () {
 			this.getCookie('access_token')
                 axios.get(`http://127.0.0.1:8091/api/uploadHistory/download/` + this.invoice.id+'?access_token='+this.parts)
                     .then(response => {
@@ -467,6 +465,7 @@
                 })
                 this.statusUpdate = 'Submited'
                 this.updateHistory()
+
             },
             checked () {
 			this.getCookie('access_token')
@@ -524,9 +523,9 @@
                         this.errors.push(e)
                     })
             },
-			fetchInvoice(){
+            fetchInvoice(){
 			this.getCookie('access_token')
-				axios.get(`http://127.0.0.1:8091/api/uploadHistory/`+this.id+'?token='+getCookie('access_token'))
+                axios.get('http://127.0.0.1:8091/api/uploadHistory/'+this.id+'?access_token='+this.parts)
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.posts = response.data
@@ -534,13 +533,13 @@
                         this.getMonthSelectList()
                         this.getYearSelectList()
                         this.getLogisticSelectList()
-						this.selectedSearchMonth=this.invoice.month
-						this.selectedSearchYear=this.invoice.year
+                        this.selectedSearchMonth=this.invoice.month
+                        this.selectedSearchYear=this.invoice.year
                     })
                     .catch(e => {
                         this.errors.push(e)
                     })
-			},
+            },
             reset () {
                 // reset form to initial state
                 this.currentStatus = STATUS_INITIAL
@@ -573,7 +572,7 @@
             },
             changeMonth () {
 			this.getCookie('access_token')
-                axios.get('http://127.0.0.1:8091/api/uploadHistory/month/' + this.selectedSearchMonth)
+                axios.get('http://127.0.0.1:8091/api/uploadHistory/month/' + this.selectedSearchMonth+'?access_token='+this.parts)
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.posts = response.data
@@ -584,7 +583,7 @@
             },
             changeYear () {
 			this.getCookie('access_token')
-                axios.get('http://127.0.0.1:8091/api/uploadHistory/year/' + this.selectedSearchYear)
+                axios.get('http://127.0.0.1:8091/api/uploadHistory/year/' + this.selectedSearchYear+'?access_token='+this.parts)
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.posts = response.data
@@ -595,7 +594,7 @@
             },
             changeLogistic () {
 			this.getCookie('access_token')
-                axios.get('http://127.0.0.1:8091/api/uploadHistory/logistic/' + this.selectedSearchLogistic)
+                axios.get('http://127.0.0.1:8091/api/uploadHistory/logistic/' + this.selectedSearchLogistic+'?access_token='+this.parts)
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.posts = response.data
@@ -609,7 +608,7 @@
             },
             getMonthSelectList(){
 			this.getCookie('access_token')
-                axios.get('http://127.0.0.1:8091/api/uploadHistory/list/month')
+                axios.get('http://127.0.0.1:8091/api/uploadHistory/list/month?access_token='+this.parts)
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.listMonth = response.data
@@ -632,15 +631,10 @@
             },
             getLogisticSelectList(){
 			this.getCookie('access_token')
-                axios.get('http://127.0.0.1:8091/api/logistic/list?access_token='+this.parts)
+                axios.get('http://127.0.0.1:8091/api/logistics/status/Active?access_token='+this.parts)
                     .then(response => {
                         // JSON responses are automatically parsed.
                         this.listLogistic = response.data
-						if(this.id==='Vue!'){
-                        }
-                        else{
-                            this.selectedSearchLogistic=this.invoice.logistic
-                        }
                     })
                     .catch(e => {
                         this.errors.push(e)
@@ -682,8 +676,8 @@
                     });
                 }, 400);
             });
-			
-			if(this.id==='Vue!'){
+
+            if(this.id==='Vue!'){
                 this.fetchUsers()
             }
             else{
