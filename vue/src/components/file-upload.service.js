@@ -1,11 +1,10 @@
 import axios from 'axios'
 
 const BASE_URL = 'http://127.0.0.1:8091'
-
-function upload (formData) {
+function upload (tes,formData) {
   //  const url = `${BASE_URL}/upload`
   const config = { headers: { 'Content-Type': 'multipart/form-data' } }
-  return axios.post(`http://127.0.0.1:8091/api/upload`, formData, config)
+  return axios.post('http://127.0.0.1:8091/api/upload?access_token='+ tes, formData, config)
   // get data
     .then(x => x.data)
     // add url field

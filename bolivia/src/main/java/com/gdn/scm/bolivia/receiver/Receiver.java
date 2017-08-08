@@ -81,13 +81,14 @@ public class Receiver {
     }
 
 //    Integer c = 0;
-    public void setAWBSystem(AWB message, AWB fromSystem) {
+    public AWB setAWBSystem(AWB message, AWB fromSystem) {
         message.setPriceSystem(fromSystem.getPriceSystem());
         message.setWeightSystem(fromSystem.getWeightSystem());
         message.setInsuranceChargeSystem(fromSystem.getInsuranceChargeSystem());
         message.setOtherChargeSystem(fromSystem.getOtherChargeSystem());
         message.setTotalChargeSystem(fromSystem.getTotalChargeSystem());
 
+        return message;
     }
 
     public Integer compareAWB(BigDecimal tolerancePercent, BigDecimal toleranceAmount, BigDecimal max, AWB message, Tolerance tolerance, Integer counterBeda) {
@@ -181,12 +182,15 @@ public class Receiver {
             Tolerance tolerance = toleranceService.getTolerance();
             //get awb from logistic
             AWB fromSystem = awbFeign.getAWBSystem(message.getAwbNumber());
+           System.out.println("FEIGN ----------- " +fromSystem.getAwbNumber());
+           System.out.println("FEIGN PRICE ----------- " +fromSystem.getPriceSystem());
             if (fromSystem != null && fromSystem.getPriceSystem() != null) {
+                 
 //                System.out.println("AWB------------------" + message.getAwbNumber());
 //                System.out.println("from system " + fromSystem);
 //                System.out.println("getPrice ----------- " + fromSystem.getPriceSystem());
 
-                setAWBSystem(message, fromSystem);
+                message=setAWBSystem(message, fromSystem);
 //                message.setPriceSystem(fromSystem.getPriceSystem());
 //                message.setWeightSystem(fromSystem.getWeightSystem());
 //                message.setInsuranceChargeSystem(fromSystem.getInsuranceChargeSystem());

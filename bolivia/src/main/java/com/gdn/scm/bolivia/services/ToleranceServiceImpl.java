@@ -20,21 +20,35 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ToleranceServiceImpl implements ToleranceService {
+
     @Autowired
-    ToleranceRepository toleranceRepository; 
+    ToleranceRepository toleranceRepository;
 
     @Override
-    public void addTolerance(ToleranceRequest request) {
-        Tolerance tolerance = new Tolerance();
-        BeanUtils.copyProperties(request, tolerance);
-        toleranceRepository.save(tolerance);
+    public Tolerance addTolerance(ToleranceRequest request) {
+        try {
+            Tolerance tolerance = new Tolerance();
+            BeanUtils.copyProperties(request, tolerance);
+            toleranceRepository.save(tolerance);
+            return tolerance;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
-    public void updateTolerance(ToleranceRequest request) {
-        Tolerance tolerance=toleranceRepository.findOne(request.getId());
-        BeanUtils.copyProperties(request, tolerance);
-        toleranceRepository.save(tolerance);
+    public Tolerance updateTolerance(ToleranceRequest request) {
+        try {
+            Tolerance tolerance = toleranceRepository.findOne(request.getId());
+            BeanUtils.copyProperties(request, tolerance);
+            toleranceRepository.save(tolerance);
+            System.out.println("berhasil");
+            return tolerance;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

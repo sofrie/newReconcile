@@ -63,6 +63,7 @@ public class RestUploadController {
     //@ResponseBody
     @CrossOrigin
     public ResponseEntity<?> uploadFile(@RequestParam MultipartFile invoiceFile) {
+        System.out.println("tessssssssssssss");
 
         logger.debug("Single file upload!");
 

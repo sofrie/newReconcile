@@ -15,6 +15,7 @@ import static java.lang.System.out;
 import static java.time.Clock.system;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,15 +32,14 @@ public class LogisticProviderServiceImpl implements LogisticProviderService {
     @Override
     public void addLogisticProvider(LogisticProviderRequest request) {
         LogisticProvider logistic = new LogisticProvider(request.getLogisticCode(), request.getLogisticName(), request.getStatus(), request.getDiscount(), request.getVat());
+        System.out.println("tes");
         Integer count;
         count = -1;
         try {
             count = this.findLastId().getId();
-            System.out.println("countt" + count.toString());
-            System.out.println("countttttttttttt" + count.toString());
             if (count != -1 && count != null) {
                 count = count + 1;
-                System.out.println("countttttttttttt" + count.toString());
+//                System.out.println("countttttttttttt" + count.toString());
             } else {
                 count = 1;
             }
@@ -68,18 +68,19 @@ public class LogisticProviderServiceImpl implements LogisticProviderService {
 
     @Override
     public void updateLogisticProvider(LogisticProviderRequest a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try
+        {
+        LogisticProvider update=logisticProviderRepository.findOne(a.getId());
+        BeanUtils.copyProperties(a, update);
+        logisticProviderRepository.save(update);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("gagal");
+        }
     }
 
-    @Override
-    public void deleteLogisticProvider(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-//    @Override
-//    public List<LogisticProvider> GetAllLogisticProvider(Integer merchantid) {
-//        
-//    }
     @Override
     public List<LogisticProvider> getByStatus(String status) {
         if (status.equals("All")) {
@@ -97,7 +98,9 @@ public class LogisticProviderServiceImpl implements LogisticProviderService {
     @Override
     public void setStatusInactive(Integer id){
         LogisticProvider l=logisticProviderRepository.getOne(id);
+       
         if(l!=null){
+            //ubah status L jadi inactive (L = tmpResult d junit)
             l.setStatus("Inactive");
             logisticProviderRepository.save(l);
         }

@@ -42,6 +42,15 @@ public interface InvoiceRepository extends JpaRepository<Invoice, String> {
     
     @Query("select a from Invoice a order by a.year asc, a.month asc")
     public Page<Invoice> findAllOrderByYearAndMonth(Pageable pageable);
+    
+    @Query("select a from Invoice a where a.statusInvoice='OK' or a.statusInvoice='Problem Exist' or a.statusInvoice='Rejected' or a.statusInvoice='On Process' or a.statusInvoice='Uploaded' order by a.year asc, a.month asc")
+    public Page<Invoice> findAllOrderByYearAndMonthMaker(Pageable pageable);
+    
+    @Query("select a from Invoice a where a.statusInvoice='Submited' order by a.year asc, a.month asc")
+    public Page<Invoice> findAllOrderByYearAndMonthChecker(Pageable pageable);
+    
+    @Query("select a from Invoice a where a.statusInvoice='Checked' order by a.year asc, a.month asc")
+    public Page<Invoice> findAllOrderByYearAndMonthApprover(Pageable pageable);
 //    public Page<Invoice> findByStatusInvoice(String statusInvoice, Pageable pageable);
 //    
 //    public Page<Invoice> findByLogisticName(String logisticName, Pageable pageable);

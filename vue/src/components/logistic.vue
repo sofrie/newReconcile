@@ -61,17 +61,16 @@
                                             </div>
                                         </div>
                                     </div>
-									 <div class="col-sm-2  pull-right">
+                                    <div class="col-sm-2  pull-right">
                                         <select v-model="filteredStatus" class="form-control pull-right" v-on:change="changeStatus()">
-											<option value="Select Status" disabled="" selected="">
-                                                Select Status
-                                            </option>
-                                            <option value="All">All</option>
-                                            <option value="Active">Active</option>
-                                            <option value="Inactive">Inactive</option>
-											
-                                        </select>
-                                    </div>
+                                         <option value="Select Status" disabled="" selected="">
+                                            Select Status
+                                        </option>
+                                        <option value="All">All</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -79,95 +78,106 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel ">                    
-					<div class="panel-heading">
-                        <h3 class="panel-title">
-                            <i class="fa fa-fw ti-menu-alt"></i> List Logistic
-                        </h3>
-                        <span class="pull-right">
-                            <i class="fa fa-fw ti-angle-up clickable"></i>
-                            <!--<i class="fa fa-fw ti-close removepanel clickable"></i>-->
-                        </span>
-                    </div>
-                    <div class="panel-body">
-                        <div class="panel-body table-responsive">
-                            <table class="table table-striped table-bordered table_width" id="example">
-                                <thead>
-                                    <tr>
-                                        <th>Logistic Name</th>
-                                        <th>Status</th>
-                                        <th>Discount</th>
-                                        <th>VAT</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="post of posts" data-toggle="modal" data-target="#basic_modal" v-on:click="openModal(post)">
-                                        <td v-on:click="sayConsole(post.id)">{{post.logisticName}}</td>
-                                        <td>{{post.status}}</td>
-                                        <td>{{post.discount}}%</td>
-                                        <td>{{post.vat}}%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel ">                    
+               <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-fw ti-menu-alt"></i> List Logistic
+                </h3>
+                <span class="pull-right">
+                    <i class="fa fa-fw ti-angle-up clickable"></i>
+                    <!--<i class="fa fa-fw ti-close removepanel clickable"></i>-->
+                </span>
+            </div>
+            <div class="panel-body">
+                <div class="panel-body table-responsive">
+                    <table class="table table-striped table-bordered table_width" id="example">
+                        <thead>
+                            <tr>
+                                <th>Logistic Name</th>
+                                <th>Status</th>
+                                <th>Discount</th>
+                                <th>VAT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="post of posts" data-toggle="modal" data-target="#basic_modal" v-on:click="openModal(post)">
+                                <td v-on:click="sayConsole(post.id)">{{post.logisticName}}</td>
+                                <td>{{post.status}}</td>
+                                <td>{{post.discount}}%</td>
+                                <td>{{post.vat}}%</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-		<div id="basic_modal" class="modal fade animated" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">{{logistic.logisticName}}</h4>
-					</div>
-					<div class="modal-body">
-						<div class="row m-t-10 col-md-12">
-                            <label class="col-md-4 text-right">
-								Logistic Name
-							</label>
-							<div class="col-md-8">
-								: {{logistic.logisticName}}
-							</div>
-                        </div>
-						<div class="row m-t-10 col-md-12">
-                            <label class="col-md-4 text-right">
-								Status
-							</label>
-							<div class="col-md-8">
-								: {{logistic.status}}
-							</div>
-                        </div>
-						<div class="row m-t-10 col-md-12">
-                            <label class="col-md-4 text-right">
-								Discount
-							</label>
-							<div class="col-md-8">
-								: {{logistic.discount}}
-							</div>
-                        </div>
-						<div class="row m-t-10 col-md-12">
-                            <label class="col-md-4 text-right">
-								VAT
-							</label>
-							<div class="col-md-8">
-								: {{logistic.vat}}
-							</div>
-                        </div>
-						<div class="row m-t-10"></div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" v-if="logistic.status==='Active'" v-on:click="Inactivate(logistic)" class="btn btn-danger">Inactive</button>
-						<button type="button" v-if="logistic.status==='Inactive'" v-on:click="Activate(logistic)" class="btn btn-success">Activate</button>
-					</div>
-				</div>
-			</div>
-		</div>
-        <!--main content ends-->
     </div>
+</div>
+<div id="basic_modal" class="modal fade animated" role="dialog">
+ <div class="modal-dialog">
+    <div class="modal-content">
+       <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{logistic.logisticName}}</h4>
+      </div>
+      <div class="modal-body">
+          <div class="row m-t-10 col-md-12">
+            <label class="col-md-4 text-right">
+                Logistic Name
+            </label>
+            <div class="col-md-8">
+                <input class="form-control" type="text" ref="logisticName" v-model="logName">
+
+            </div>
+        </div>
+        <div class="row m-t-10 col-md-12">
+            <label class="col-md-4 text-right">
+                Status
+            </label>
+            <div class="col-md-8">
+                <select id="select-gear" v-model="logStatus" class="form-control">
+                    <option value="Select Status" disabled="" selected="">
+                        Select status
+                    </option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+        </div>
+        <div class="row m-t-10 col-md-12">
+            <label class="col-md-4 text-right">
+                Discount
+            </label>
+            <div class="col-md-8">
+                <input class="form-control" type="text" ref="discount" v-model="logDiscount">
+
+            </div>
+        </div>
+        <div class="row m-t-10 col-md-12">
+            <label class="col-md-4 text-right">
+                VAT
+            </label>
+            <div class="col-md-8">
+                <input class="form-control" type="text" ref="vat" v-model="logVAT">
+
+            </div>
+        </div>
+        <div class="row m-t-10"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-succes" v-on:click="updateLogistic()" data-dismiss="modal">Submit</button>
+ <!--  <button type="button" v-if="logistic.status==='Active'" v-on:click="Inactivate(logistic)" class="btn btn-danger">Inactive</button>
+ <button type="button" v-if="logistic.status==='Inactive'" v-on:click="Activate(logistic)" class="btn btn-success">Activate</button> -->
+</div>
+</div>
+</div>
+</div>
+<!--main content ends-->
+</div>
 </template>
 <script>
     import fileinput from "../vendors/bootstrap-fileinput/js/fileinput.min.js"
@@ -194,8 +204,13 @@
             AwbNumber: '',
             Discount: '',
             VAT: '',
-			logistic: [],
-			filteredStatus: 'Select Status'
+            logistic: [],
+            filteredStatus: 'Select Status',
+            parts: '',
+            logName: '',
+            logStatus: '',
+            logDiscount: '',
+            logVAT: ''
         }
         ),
         mounted: function() {
@@ -280,66 +295,92 @@
         destroyed: function() {
         },
         methods: {
-            createLogistic () {
-                axios.post(`http://127.0.0.1:8091/api/logistics`, {
-                  logisticCode: 'haha',
-                  logisticName: this.AwbNumber,
-                  status: this.selectedStatus,
-                  discount: this.Discount,
-                  vat: this.VAT
-              })
-                setTimeout(this.fetchLogistics, 7000);
-            },
-            fetchLogistics() {
-                axios.get(`http://127.0.0.1:8091/api/logistics`)
-                .then(response => {
+            getCookie(name){
+                var value="; "+document.cookie;
+                this.parts=value.split("; "+name+"=");
+                if(this.parts.length==2)
+                  this.parts=this.parts.pop().split(";");
+          },
+          updateLogistic () {
+            this.getCookie('access_token')
+            axios.post('http://127.0.0.1:8091/api/logistics/update?access_token='+this.parts, {
+                id: this.logistic.id,
+                logisticCode: 'haha',
+                logisticName: this.logName,
+                status: this.logStatus,
+                discount: this.logDiscount,
+                vat: this.logVAT
+            })
+        },
+        createLogistic () {
+            this.getCookie('access_token')
+            axios.post('http://127.0.0.1:8091/api/logistics?access_token='+this.parts, {
+              logisticCode: 'haha',
+              logisticName: this.AwbNumber,
+              status: this.selectedStatus,
+              discount: this.Discount,
+              vat: this.VAT
+          })
+            setTimeout(this.fetchLogistics, 7000);
+        },
+        fetchLogistics() {
+            this.getCookie('access_token')
+            axios.get('http://127.0.0.1:8091/api/logistics?access_token='+this.parts)
+            .then(response => {
                   // JSON responses are automatically parsed.
                   this.posts = response.data
               })
-                .catch(e => {
-                  this.errors.push(e)
-              })
-            },
-            reset () {
+            .catch(e => {
+              this.errors.push(e)
+          })
+        },
+        reset () {
                 // reset form to initial state
                 this.currentStatus = STATUS_INITIAL
                 this.uploadedFiles = []
                 this.uploadError = null
             },
-			openModal(obj){
-				this.logistic=obj
-			},
+            openModal(obj){
+                this.logistic=obj
+                this.logName=this.logistic.logisticName
+                this.logStatus=this.logistic.status
+                this.logDiscount=this.logistic.discount
+                this.logVAT=this.logistic.vat
+            },
             Inactivate(log) {
-                axios.get(`http://127.0.0.1:8091/api/logistics/inactive/`+log.id)
+                this.getCookie('access_token')
+                axios.get('http://127.0.0.1:8091/api/logistics/inactive/'+log.id+'?access_token='+this.parts)
                 .then(response => {
                   // JSON responses are automatically parsed.
               })
                 .catch(e => {
                   this.errors.push(e)
               })
-			  setTimeout(this.fetchLogistics, 400);
-			  $('#basic_modal').modal('hide');
+                setTimeout(this.fetchLogistics, 400);
+                $('#basic_modal').modal('hide');
             },
             Activate(log) {
-                axios.get(`http://127.0.0.1:8091/api/logistics/active/`+log.id)
+                this.getCookie('access_token')
+                axios.get('http://127.0.0.1:8091/api/logistics/active/'+log.id+'?access_token='+this.parts)
                 .then(response => {
                   // JSON responses are automatically parsed.
               })
                 .catch(e => {
                   this.errors.push(e)
               })
-			  setTimeout(this.fetchLogistics, 400);
-			  $('#basic_modal').modal('hide');
+                setTimeout(this.fetchLogistics, 400);
+                $('#basic_modal').modal('hide');
             },
             changeStatus () {
-                axios.get('http://127.0.0.1:8091/api/logistics/' + this.filteredStatus)
-                    .then(response => {
+                this.getCookie('access_token')
+                axios.get('http://127.0.0.1:8091/api/logistics/' + this.filteredStatus+'?access_token='+this.parts)
+                .then(response => {
                         // JSON responses are automatically parsed.
                         this.posts = response.data
                     })
-                    .catch(e => {
-                        this.errors.push(e)
-                    })
+                .catch(e => {
+                    this.errors.push(e)
+                })
             }
         },
         computed: {
@@ -375,8 +416,8 @@
                 },500);
             });
             this.fetchLogistics()
-			selectedStatus: 'Select Status'
-			filteredStatus: 'Select Status'
+            selectedStatus: 'Select Status'
+            filteredStatus: 'Select Status'
         }
     }
 </script>

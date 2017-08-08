@@ -147,5 +147,42 @@ public class ToleranceRequest {
         this.otherChargeAmount = otherChargeAmount;
     }
 
+    public ToleranceRequest() {
+    }
+
+    public ToleranceRequest(BigDecimal totalShippingPercentage, BigDecimal totalShippingAmount, BigDecimal weightPercentage, BigDecimal weightAmount, BigDecimal insuranceChargePercentage, BigDecimal insuranceChargeAmount, BigDecimal pricePercentage, BigDecimal priceAmount, BigDecimal giftWrapChargePercentage, BigDecimal giftWrapChargeAmount, BigDecimal otherChargePercentage, BigDecimal otherChargeAmount) {
+        this.totalShippingPercentage = totalShippingPercentage;
+        this.totalShippingAmount = totalShippingAmount;
+        this.weightPercentage = weightPercentage;
+        this.weightAmount = weightAmount;
+        this.insuranceChargePercentage = insuranceChargePercentage;
+        this.insuranceChargeAmount = insuranceChargeAmount;
+        this.pricePercentage = pricePercentage;
+        this.priceAmount = priceAmount;
+        this.giftWrapChargePercentage = giftWrapChargePercentage;
+        this.giftWrapChargeAmount = giftWrapChargeAmount;
+        this.otherChargePercentage = otherChargePercentage;
+        this.otherChargeAmount = otherChargeAmount;
+    }
+
+    
+    
+    public ToleranceRequest(String id, BigDecimal totalShippingPercentage, BigDecimal totalShippingAmount, BigDecimal weightPercentage, BigDecimal weightAmount, BigDecimal insuranceChargePercentage, BigDecimal insuranceChargeAmount, BigDecimal pricePercentage, BigDecimal priceAmount, BigDecimal giftWrapChargePercentage, BigDecimal giftWrapChargeAmount, BigDecimal otherChargePercentage, BigDecimal otherChargeAmount) {
+        this.id = id;
+        this.totalShippingPercentage = totalShippingPercentage;
+        this.totalShippingAmount = totalShippingAmount;
+        this.weightPercentage = weightPercentage;
+        this.weightAmount = weightAmount;
+        this.insuranceChargePercentage = insuranceChargePercentage;
+        this.insuranceChargeAmount = insuranceChargeAmount;
+        this.pricePercentage = pricePercentage;
+        this.priceAmount = priceAmount;
+        this.giftWrapChargePercentage = giftWrapChargePercentage;
+        this.giftWrapChargeAmount = giftWrapChargeAmount;
+        this.otherChargePercentage = otherChargePercentage;
+        this.otherChargeAmount = otherChargeAmount;
+    }
+
+    
    
 }

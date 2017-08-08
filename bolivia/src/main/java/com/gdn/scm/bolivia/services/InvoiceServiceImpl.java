@@ -58,20 +58,20 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public void addInvoice(InvoiceRequest request) {
         Invoice ada = this.findByMonthAndYearAndLogisticName(request.getMonth(), request.getYear(), request.getLogisticName());
+        Date today = new Date();
+        Timestamp timestamp = new Timestamp(today.getTime());
+            String date = timestamp.toString();
+            System.out.println("Today " + date);
         if (ada != null) {
             isAda = true;
-
+            ada.setLastModified(timestamp.toString());
+            invoiceRepository.save(ada);
         } else {
             isAda = false;
             Invoice invoice = new Invoice();
             BeanUtils.copyProperties(request, invoice);
             invoice.setId(UUID.randomUUID().toString());
             invoice.setStatusInvoice("Open");
-
-            Date today = new Date();
-            Timestamp timestamp = new Timestamp(today.getTime());
-            String date = timestamp.toString();
-            System.out.println("Today " + date);
             invoice.setFirstUploadDate(timestamp.toString());
             invoice.setLastModified(timestamp.toString());
 
@@ -173,6 +173,19 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public Invoice findById(String Id) {
         return invoiceRepository.findOne(Id);
+    }
+
+    @Override
+    public Page<Invoice> findAllPageable(String role, Pageable pageable) {
+        if (role.equals("MAKER")) {
+            return invoiceRepository.findAllOrderByYearAndMonthMaker(pageable);
+        } else if(role.equals("CHECKER")){
+            return invoiceRepository.findAllOrderByYearAndMonthChecker(pageable);
+        }else if(role.equals("APPROVER")){
+            return invoiceRepository.findAllOrderByYearAndMonthApprover(pageable);
+        }else {
+            return invoiceRepository.findAllOrderByYearAndMonth(pageable);
+        }
     }
 
 }

@@ -51,7 +51,16 @@ public class LogisticProviderController {
     @CrossOrigin
     @RequestMapping(value = "/api/logistics", method = RequestMethod.POST)
     public void createLogistic(@RequestBody LogisticProviderRequest request) {
+        System.out.println("tambah");
         logisticProviderService.addLogisticProvider(request);
+        System.out.println("berhasil");
+        //return logistic;
+    }
+    
+    @CrossOrigin
+    @RequestMapping(value = "/api/logistics/update", method = RequestMethod.POST)
+    public void updateLogistic(@RequestBody LogisticProviderRequest request) {
+        logisticProviderService.updateLogisticProvider(request);
         //return logistic;
     }
     

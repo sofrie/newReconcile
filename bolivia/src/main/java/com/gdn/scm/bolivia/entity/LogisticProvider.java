@@ -132,6 +132,17 @@ public class LogisticProvider {
         this.vat = vat;
     }
 
+    public LogisticProvider(Integer id, String logisticCode, String logisticName, String status, BigDecimal discount, BigDecimal vat) {
+        this.id = id;
+        this.logisticCode = logisticCode;
+        this.logisticName = logisticName;
+        this.status = status;
+        this.discount = discount;
+        this.vat = vat;
+    }
+
+    
+    
     public LogisticProvider() {
     }
 }

@@ -58,9 +58,11 @@ public class InvoiceController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/api/invoice/pageable", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Invoice> getAllInvoicePageable(Pageable pageable) {
-        invoices = invoiceService.findAllPageable(pageable);
+    @RequestMapping(value = "/api/invoice/pageable/{role}/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Page<Invoice> getAllInvoicePageable(@PathVariable("role") String role,Pageable pageable) {
+        //
+        System.out.println("role "+role);
+        invoices = invoiceService.findAllPageable(role,pageable);
         pageClass = new PageClass();
         pageClass.setTotal_page(invoices.getTotalPages());
         pageClass.setItem_page(invoices.getSize());
@@ -107,7 +109,7 @@ public class InvoiceController {
         CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         request.setCreatedBy(userService.getUser(userDetails.getUsername()).getUsername());
         invoiceService.addInvoice(request);
-
+        System.out.println("tambahin invoice -------");
         return request.getCreatedBy();
     }
 

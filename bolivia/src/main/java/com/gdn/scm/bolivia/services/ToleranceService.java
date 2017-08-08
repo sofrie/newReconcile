@@ -15,9 +15,9 @@ import java.util.List;
  */
 public interface ToleranceService {
 
-    void addTolerance(ToleranceRequest tolerance);
+    Tolerance addTolerance(ToleranceRequest tolerance);
 
-    void updateTolerance(ToleranceRequest tolerance);
+    Tolerance updateTolerance(ToleranceRequest tolerance);
 
     Tolerance getTolerance();
 }

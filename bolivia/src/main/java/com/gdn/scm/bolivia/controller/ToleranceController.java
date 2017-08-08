@@ -30,12 +30,12 @@ public class ToleranceController {
     ToleranceService toleranceService;
 
     @CrossOrigin
-    @RequestMapping(value = "/api/tolerances", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "maker/api/tolerances", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Tolerance listTolerance() {
         return toleranceService.getTolerance();
     }
     @CrossOrigin
-    @RequestMapping(value = "/api/tolerances", method = RequestMethod.POST)
+    @RequestMapping(value = "maker/api/tolerances", method = RequestMethod.POST)
     public void updateTolerance(@RequestBody ToleranceRequest request) {
         toleranceService.addTolerance(request);
     }

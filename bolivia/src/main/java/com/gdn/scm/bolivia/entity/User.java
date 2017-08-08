@@ -25,57 +25,90 @@ import lombok.Setter;
 @Entity
 @Table(name = User.TABLE_NAME)
 public class User {
-    
+
     public static final String TABLE_NAME = "BLV_USER";
-    
+
     public static final String COLUMN_ID = "ID";
-    
+
     public static final String COLUMN_USERNAME = "USERNAME";
-    
+
     public static final String COLUMN_PASSWORD = "PASSWORD";
-    
+
+    public static final String COLUMN_EMAIL = "EMAIL";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = COLUMN_ID)    
+    @Column(name = COLUMN_ID)
     private Integer id;
-    
-    @Column(name = COLUMN_USERNAME)    
+
+    @Column(name = COLUMN_USERNAME)
     private String username;
-     
-    @Column(name = COLUMN_PASSWORD)    
+
+    @Column(name = COLUMN_PASSWORD)
     private String password;
-      
-    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+
+    @Column(name = COLUMN_EMAIL)
+    private String email;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Role> roles;
-    User() {}
+
+    User() {
+    }
+
+    public User(String username, String password, String email, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+    }
+    
+    
+
     public User(String username, String password, List<Role> roles) {
         this.username = username;
         this.password = password;
         this.roles = roles;
     }
-    
+
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public List<Role> getRoles() {
         return roles;
     }
+
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

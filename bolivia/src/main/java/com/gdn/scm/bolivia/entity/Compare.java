@@ -124,7 +124,7 @@ public class Compare {
             Boolean ada = false;
             while (itr.hasNext() && !ada) {
                 Row row = itr.next();
-                if (row.getRowNum() >= 1) {
+                if (row.getRowNum() >= 2) {
                     awb = new AWB();
                     Cell awbNumberCell = row.getCell(2);
                     if (awbNumberCell != null) {
@@ -217,7 +217,7 @@ public class Compare {
 //                System.out.println("tmp " + tmp);
 //            }
             Thread.sleep(500);
-//            System.out.println("number awb " + numberAWB);
+            System.out.println("number awb " + numberAWB);
 
             if (upload != null) {
                 setStatusInvoiceAndUploadHistory( currentInvoice,  upload);
@@ -250,6 +250,7 @@ public class Compare {
             BigDecimal b = aWBService.countTotalPriceLogistic(currentInvoice);
             BigDecimal totalTagihan = b.add((logistic.getVat()).divide(new BigDecimal(100)).multiply(b)).subtract((logistic.getDiscount()).divide(new BigDecimal(100)).multiply(b));
             totalTagihan = totalTagihan.add(aWBService.countTotalnsuranceLogistic(currentInvoice));
+            System.out.println("total TAGIHAN "+totalTagihan);
             upload.setJumlahTagihan(totalTagihan);
             currentInvoice.setTagihan(totalTagihan);
         } catch (Exception e) {
@@ -260,6 +261,7 @@ public class Compare {
     public void reset(Invoice currentInvoice, UploadHistory upload) {
         invoiceService.updateInvoice(currentInvoice);
         uploadHistoryService.addUploadHistory(upload);
+        System.out.println("reset rest reset");
         counter = 0;
         receiver.counter = 0;
         receiver.problem = 0;

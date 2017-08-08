@@ -29,7 +29,8 @@ public interface InvoiceService {
     List<Invoice> findByStatusInvoice(String statusInvoice);
     List<Invoice> findByStatusInvoiceAndLogisticName(String statusInvoice, String logisticName); 
     
-    Page<Invoice> findAllPageable(Pageable pageable); 
+    Page<Invoice> findAllPageable(Pageable pageable);
+    Page<Invoice> findAllPageable(String role,Pageable pageable);
     
     Invoice findById(String Id);
 //    List<String> getLogisticName(String logisticName);

@@ -106,9 +106,9 @@ public class BoliviaApplication {
     @Autowired
     public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository repository, UserService userService) throws Exception {
         if (repository.count() == 0) {
-            userService.save(new User("maker", "adminPassword", Arrays.asList(new Role("MAKER"))));
-            userService.save(new User("checker", "adminPassword", Arrays.asList(new Role("CHECKER"))));
-            userService.save(new User("aprover", "adminPassword", Arrays.asList(new Role("APPROVER"))));
+            userService.save(new User("maker", "adminPassword","makerbolivia1@gmail.com", Arrays.asList(new Role("MAKER"))));
+            userService.save(new User("checker", "adminPassword","checkerbolivia1@gmail.com", Arrays.asList(new Role("CHECKER"))));
+            userService.save(new User("aprover", "adminPassword","approverbolivia1@gmail.com", Arrays.asList(new Role("APPROVER"))));
         }
         builder.userDetailsService(userDetailsService(repository)).passwordEncoder(passwordEncoder);
     }
