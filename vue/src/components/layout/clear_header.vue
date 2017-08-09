@@ -113,9 +113,9 @@
                                 </router-link>
                             </li>-->
 							<li>
-                                <router-link to="/login" exact>
+                                <a v-on:click="clearCookie()">
                                     <i class="fa fa-fw ti-shift-right"></i> Logout
-                                </router-link>
+                                </a>
                             </li>
                             <!--<li role="presentation" class="divider"></li>-->
                             <!-- Menu Footer-->
@@ -185,7 +185,11 @@ export default {
                 var margin_right = (window_w - body_w) / 2;
                 $('#right').css('right', margin_right);
             }
-        }
+        },
+		clearCookie(){
+			document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+			window.location.href = '/#/login/'
+		}
 
     }
 }

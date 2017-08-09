@@ -11,7 +11,6 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-12">
-                                <form id="authentication" method="get" class="login_validator">
 								{{token}} {{username}} {{password}}
                                     <div class="form-group">
                                         <label for="email" class="sr-only"> E-mail</label>
@@ -27,11 +26,10 @@
                                         </label>
                                     </div>-->
                                     <div class="form-group">
-                                        <button class="btn btn-primary btn-block" v-on:click="Login">Sign In</button>
+                                        <button class="btn btn-primary btn-block" v-on:click="Login()">Sign In</button>
                                     </div>
                                     <!--<a href="#/reset_password" id="forgot" class="forgot"> Forgot Password ? </a>
                                     <span class="pull-right sign-up">New ? <a href="#/register">Sign Up</a></span>-->
-                                </form>
                             </div>
                         </div>
                         <!--<div class="row text-center social">
@@ -90,6 +88,7 @@ export default {
 			}).then(response => {
                 // JSON responses are automatically parsed.
                 document.cookie="access_token="+response.data.access_token+";path=/";
+				window.location.href = '/#/'
             });
         }
 	},
